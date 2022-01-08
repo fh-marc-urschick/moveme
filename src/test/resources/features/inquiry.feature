@@ -10,3 +10,10 @@ Feature: Raise an inquiry for a private movement within the same town
     When she inquires support for the movement
     Then she gets a reference number back
     And the information she will get contacted within the next 24 hours
+
+ Scenario: Raise an inquiry successfully
+    Given Abc Def wants to move from Winarskystr. 14/20/1, 1200 Wien to Innstraße 7/1, 4020 Linz
+    And wants to be contacted via telephone number +4312345678
+    When she inquires support for the movement
+    Then she gets a reference number back
+    And the information she will get contacted within the next 24 hours

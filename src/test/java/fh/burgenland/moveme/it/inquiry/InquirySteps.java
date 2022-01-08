@@ -26,6 +26,7 @@ public class InquirySteps {
         this.inquiryContext.client = client;
         this.inquiryContext.fromLocation = from;
         this.inquiryContext.toLocation = to;
+        assertThat(to.getCity()).isEqualTo(from.getCity());
     }
 
     @Given("wants to be contacted via telephone number {contactNumber}")

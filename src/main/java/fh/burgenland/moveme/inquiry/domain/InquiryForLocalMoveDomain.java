@@ -20,6 +20,7 @@ public class InquiryForLocalMoveDomain {
     String fromStreet;
     String fromZip;
     String city;
+    String referenceNumber;
 
     public InquiryForLocalMoveDomain() {
     }

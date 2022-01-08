@@ -47,3 +47,8 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
+              - column:
+                  name: reference_number
+                  type: varchar(255)
+                  constraints:
+                    nullable: false

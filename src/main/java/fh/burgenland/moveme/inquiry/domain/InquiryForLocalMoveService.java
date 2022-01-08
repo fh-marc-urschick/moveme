@@ -18,8 +18,9 @@ public class InquiryForLocalMoveService {
     }
 
     public DomainResult<InquiryContactAnswer> inquiry(InquiryForLocalMove inquiry) {
-        this.repository.save(toDomain(inquiry));
-        return DomainResult.<InquiryContactAnswer>builder().success(createInquiryContactAnswer(inquiry)).build();
+        InquiryContactAnswer ica = createInquiryContactAnswer(inquiry);
+        this.repository.save(toDomain(inquiry, ica.getReferenceNumber()));
+        return DomainResult.<InquiryContactAnswer>builder().success(ica).build();
     }
 
     private InquiryContactAnswer createInquiryContactAnswer(InquiryForLocalMove inquiry) {
@@ -30,7 +31,7 @@ public class InquiryForLocalMoveService {
         return ReferenceNumber.localReferenceNumberOf(inquiry.getInquiryContact().getName(), inquiry.getFromInquiryLocation().getCity()).getValue();
     }
 
-    private InquiryForLocalMoveDomain toDomain(InquiryForLocalMove inquiry) {
+    private InquiryForLocalMoveDomain toDomain(InquiryForLocalMove inquiry, String referenceNumber) {
         var domain = new InquiryForLocalMoveDomain();
         domain.setName(inquiry.getInquiryContact().getName());
         domain.setTelephoneNumber(inquiry.getInquiryContact().getTelephoneNumber());
@@ -39,6 +40,7 @@ public class InquiryForLocalMoveService {
         domain.setFromStreet(inquiry.getFromInquiryLocation().getStreet());
         domain.setFromZip(inquiry.getFromInquiryLocation().getZip());
         domain.setCity(inquiry.getFromInquiryLocation().getCity());
+        domain.setReferenceNumber(referenceNumber);
         return domain;
     }
 }
