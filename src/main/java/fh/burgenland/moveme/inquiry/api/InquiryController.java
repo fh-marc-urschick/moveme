@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class InquiryController {
 
-    private final InquiryForLocalMoveService service;
+    private transient final InquiryForLocalMoveService service;
 
     @Autowired
     public InquiryController(InquiryForLocalMoveService service) {

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class InquiryForLocalMoveService {
 
-    private final InquiryForLocalMoveRepository repository;
+    private transient final InquiryForLocalMoveRepository repository;
 
     @Autowired()
     public InquiryForLocalMoveService(InquiryForLocalMoveRepository repository) {
@@ -19,10 +19,7 @@ public class InquiryForLocalMoveService {
 
     public DomainResult<InquiryContactAnswer> inquiry(InquiryForLocalMove inquiry) {
         this.repository.save(toDomain(inquiry));
-        return DomainResult
-                .<InquiryContactAnswer>builder()
-                .success(createInquiryContactAnswer(inquiry))
-                .build();
+        return DomainResult.<InquiryContactAnswer>builder().success(createInquiryContactAnswer(inquiry)).build();
     }
 
     private InquiryContactAnswer createInquiryContactAnswer(InquiryForLocalMove inquiry) {
