@@ -25,7 +25,8 @@ To start the application for development go to the Class `fh.burgenland.moveme.M
 
 ## Editor Config
 
-Our general code guidelines contain a standardized charset of ```UTF-8``` and ```LF``` as new line character for compatibility across all general platforms. Furthermore, we introduced 4 spaces for indentation as well as no tabs.
+Our general code guidelines contain a standardized charset of ```UTF-8``` and ```LF``` as new line character for compatibility across all general platforms. Furthermore, we introduced 2 spaces for indentation as well as no tabs and some additional settings.
+We added different settings for .json, .md, .yml/.yaml and Makefile.
 
 ## PMD
 
