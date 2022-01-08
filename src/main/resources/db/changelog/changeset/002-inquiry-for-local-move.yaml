@@ -1,0 +1,13 @@
+databaseChangeLog:
+    - changeSet:
+       id: addColumn
+       author: Isabella
+       changes:
+         - addColumn:
+             tableName: INQUIRY_FOR_LOCAL_MOVE
+             columns:
+               - column:
+                   name: reference_number
+                   type: varchar(255)
+                   constraints:
+                     nullable: false
