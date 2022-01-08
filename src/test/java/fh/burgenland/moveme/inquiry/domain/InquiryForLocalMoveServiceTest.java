@@ -19,7 +19,7 @@ class InquiryForLocalMoveServiceTest {
     private InquiryForLocalMoveRepository repository;
 
     @Test
-    void should_inquire_the_movement_successfully() {
+    void should_inquire_the_movement_successfully() throws Exception {
         var inquiryDomain = getInquiryDomainForAlexiPaoli();
         Mockito.when(repository.save(inquiryDomain)).thenReturn(inquiryDomain);
         var service = new InquiryForLocalMoveService(repository);

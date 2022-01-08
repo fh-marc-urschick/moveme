@@ -17,7 +17,10 @@ public class InquiryForLocalMoveService {
         this.repository = repository;
     }
 
-    public DomainResult<InquiryContactAnswer> inquiry(InquiryForLocalMove inquiry) {
+    public DomainResult<InquiryContactAnswer> inquiry(InquiryForLocalMove inquiry) throws Exception {
+        if (!inquiry.getToInquiryLocation().getCity().equals(inquiry.getFromInquiryLocation().getCity())) {
+            throw new Exception("Only local moves are allowed.");
+        }
         InquiryContactAnswer ica = createInquiryContactAnswer(inquiry);
         this.repository.save(toDomain(inquiry, ica.getReferenceNumber()));
         return DomainResult.<InquiryContactAnswer>builder().success(ica).build();

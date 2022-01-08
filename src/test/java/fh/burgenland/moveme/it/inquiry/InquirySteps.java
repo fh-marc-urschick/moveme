@@ -5,6 +5,7 @@ import fh.burgenland.moveme.inquiry.api.InquiryContactAnswer;
 import fh.burgenland.moveme.inquiry.api.InquiryForLocalMove;
 import fh.burgenland.moveme.inquiry.api.InquiryLocation;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -26,7 +27,7 @@ public class InquirySteps {
         this.inquiryContext.client = client;
         this.inquiryContext.fromLocation = from;
         this.inquiryContext.toLocation = to;
-        assertThat(to.getCity()).isEqualTo(from.getCity());
+        //assertThat(to.getCity()).isEqualTo(from.getCity());
     }
 
     @Given("wants to be contacted via telephone number {contactNumber}")
@@ -63,5 +64,26 @@ public class InquirySteps {
     @When("the information she will get contacted within the next {int} hours")
     public void theInformationSheWillGetContactedWithinTheNext24Hours(int hours) {
         assertThat(this.inquiryContext.inquiryContactAnswer.getAnswerHour()).isEqualTo(hours);
+    }
+
+    @When("she tries to inquire support for the movement")
+    public void theInformationThatOnlyLocalMoveIsPossible() {
+        var contact = InquiryContact.builder().name(this.inquiryContext.client.getName()).telephoneNumber(this.inquiryContext.contactInformation.getTelephoneNumber()).build();
+        var fromLocation = InquiryLocation.builder().street(this.inquiryContext.fromLocation.getStreet()).zip(this.inquiryContext.fromLocation.getZip()).city(this.inquiryContext.fromLocation.getCity()).build();
+        var toLocation = InquiryLocation.builder().street(this.inquiryContext.toLocation.getStreet()).zip(this.inquiryContext.toLocation.getZip()).city(this.inquiryContext.toLocation.getCity()).build();
+        var request = InquiryForLocalMove
+            .builder()
+            .inquiryContact(contact)
+            .fromInquiryLocation(fromLocation)
+            .toInquiryLocation(toLocation).build();
+       this.webClient.post().uri("inquireForLocalMove")
+            .bodyValue(request)
+            .exchange()
+            .expectStatus()
+            .is5xxServerError();
+    }
+
+    @When("she gets informed that only a local move is possible")
+    public void she_gets_informed_that_only_a_local_move_is_possible() {
     }
 }

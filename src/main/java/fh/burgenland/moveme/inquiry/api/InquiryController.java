@@ -19,7 +19,7 @@ public class InquiryController {
     }
 
     @PostMapping("inquireForLocalMove")
-    public ResponseEntity<InquiryContactAnswer> inquireForLocalMove(@RequestBody InquiryForLocalMove inquiry) {
+    public ResponseEntity<InquiryContactAnswer> inquireForLocalMove(@RequestBody InquiryForLocalMove inquiry) throws Exception {
         var domainResult = this.service.inquiry(inquiry);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(domainResult.getSuccess());
