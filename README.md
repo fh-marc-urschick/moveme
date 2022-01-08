@@ -5,7 +5,7 @@ inside a town, to different towns or even countries.
 
 ## Team
 
-Our team It's a feature consists of Stefan Gass, Isabella Zaby, Michael Pfeiffer, Tanja Buczkowski and Marc Urschick
+Our team It's a feature consists of Stefan, Isabella, Michael, Tanja and Marc
 
 ## Getting Started
 
